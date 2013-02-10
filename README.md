@@ -60,13 +60,17 @@ If everything worked and you have the cordova template available, you are ready 
 
 `grunt` (default command): runs the lint task, the concat and min tasks (if you decided you wanted them) and runs the jasmine tests that come with the cordova default example project created in the `www` folder when creating the project.
 
-`grunt jasmine`: runs tests in `www/spec` using the `www/spec.html` file
+`grunt jasmine`: runs tests in `www/spec` using the `www/spec.html` file.
 
-`grunt lint`: lints the files in `www/js` using jshint
+`grunt lint`: lints the files in `www/js` using jshint.
 
-`grunt debug:ios`: runs `cordova build ios && cordova emulate ios` to run up your project in the iOS Simulator (requires [ios-sim](https://github.com/phonegap/ios-sim))
+`grunt debug:ios`: runs `cordova build ios && cordova emulate ios` to run up your project in the iOS Simulator (requires [ios-sim](https://github.com/phonegap/ios-sim)).
 
+`grunt debug:android`: runs `cordova build android && cordova emulate android` to run up your project in the Android Emulator.
 
+`grunt debug:blackberry`: runs `cordova build blackberry && cordova emulate blackberry` to run up your project in the Blackberry environment (ignorant of the dev env, much? feel free to send me a pull req with the right name).
+
+`grunt watch`: watches the files in `www/js` and the grunt file itself for changes and runs `grunt lint` and `grunt test` when triggered.
 
 
 

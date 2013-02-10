@@ -81,10 +81,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jasmine-task');
   grunt.loadNpmTasks('grunt-shell');
 
-  // Default task.
+  // Default task
   grunt.registerTask('default', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %}');
-  grunt.registerTask('debug_ios', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_ios');
-  grunt.registerTask('debug_android', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_android');
-  grunt.registerTask('debug_blackberry', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_blackberry');
+  
+  // Custom tasks
+  grunt.registerTask('test', '{%= test_task %}');
+  grunt.registerTask('debug:ios', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_ios');
+  grunt.registerTask('debug:android', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_android');
+  grunt.registerTask('debug:blackberry', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_blackberry');
 
 };
