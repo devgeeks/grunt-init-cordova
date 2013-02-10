@@ -26,3 +26,14 @@ Then install the global npm dependencies (depending how you installed node.js, y
   - After installing the Cordova cli tool, you will get a message to run a `sudo chown` command on the cordova installation dir. This step is **very** important, do not skip it.
 - `npm install -g grunt`
   - this will give us the `grunt` command that will be the backbone of our build set-up (note: when grunt reaches 0.4.0 stable, some of this might change as it's install process has changed)
+
+Now clone this repo into your grunt userDir:
+
+- `mkdir -p ~/.grunt/tasks/init` (just in case)
+- `git clone https://github.com/devgeeks/grunt-init-cordova.git ~/.grunt/`
+
+If you run `grunt init`, under "currently-available init templates" you should now have an entry called "cordova"
+
+
+
+
