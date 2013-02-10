@@ -22,7 +22,7 @@
 
 Then install the global npm dependencies (depending how you installed node.js, you might need to use `sudo` before any of the global (-g) npm installs):
 
-- `npm install -g cordova`
+- `npm install -g cordova` (assuming you haven't already, this is all you need to create cordova projects)
   - After installing the Cordova cli tool, you will get a message to run a `sudo chown` command on the cordova installation dir. This step is **very** important, do not skip it.
 - `npm install -g grunt`
   - this will give us the `grunt` command that will be the backbone of our build set-up (note: when grunt reaches 0.4.0 stable, some of this might change as it's install process has changed)
