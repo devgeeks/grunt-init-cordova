@@ -41,6 +41,21 @@ module.exports = function(grunt) {
     jasmine: {
       all: ['www/spec.html']
     },
+    shell: {
+      _options: {
+        failOnError: true,
+        stdout: true
+      },
+      debug_ios: {
+        command: 'cordova build ios && cordova emulate ios'
+      },
+      debug_android: {
+        command: 'cordova build android && cordova emulate android'
+      },
+      debug_blackberry: {
+        command: 'cordova build blackberry && cordova emulate blackberry'
+      }
+    },
     jshint: {
       options: {
         curly: true,
@@ -64,8 +79,12 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-jasmine-task');
+  grunt.loadNpmTasks('grunt-shell');
 
   // Default task.
   grunt.registerTask('default', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %}');
+  grunt.registerTask('debug_ios', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_ios');
+  grunt.registerTask('debug_android', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_android');
+  grunt.registerTask('debug_blackberry', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_blackberry');
 
 };
