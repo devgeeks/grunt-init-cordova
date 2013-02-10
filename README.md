@@ -30,7 +30,8 @@ Then install the global npm dependencies (depending how you installed node.js, y
 Now clone this repo into your grunt userDir:
 
 - `mkdir -p ~/.grunt/tasks/init` (just in case)
-- `git clone https://github.com/devgeeks/grunt-init-cordova.git ~/.grunt/`
+- `git clone https://github.com/devgeeks/grunt-init-cordova.git ~/.grunt/tasks/init`
+- NOTE: if you already have some custom templates, you might have to clone the repo somewhere else and copy the `cordova.js` and `cordova` folder to `~/.grunt/tasks/init`
 
 If you run `grunt init`, under "currently-available init templates" you should now have an entry called "cordova"
 
