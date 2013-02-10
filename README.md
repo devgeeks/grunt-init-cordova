@@ -1,6 +1,6 @@
 # grunt-init-cordova
 
-### Grunt init template for Apache Cordova cli-generated projects
+### Grunt init template to create a Grunt-based build/workflow for Apache Cordova cli-generated projects
 
 ## Requirements
 
