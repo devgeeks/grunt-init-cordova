@@ -11,7 +11,7 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "grunt": "~0.3.17",
+    "grunt": "~0.4.0",
     "grunt-shell": "0.1.x",
     "temporary": "0.0.5",
     "grunt-jasmine-task": "~0.2.3"
