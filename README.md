@@ -2,6 +2,9 @@
 
 ### Grunt init template to create a Grunt-based build/workflow for Apache Cordova cli-generated projects
 
+### NOTE: This init template is undergoing the transition from Grunt 0.3.x to 0.4.x. It is currently broken until that is complete. Sorry, about that.
+
+
 ## Requirements
 
 - Node and npm - [http://nodejs.org/](http://nodejs.org/)
