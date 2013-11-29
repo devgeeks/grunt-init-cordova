@@ -13,8 +13,8 @@ exports.description = 'Create a basic grunt-driven workflow for apache ' +
 
 // Template-specific notes to be displayed before question prompts.
 exports.notes = 'This template uses the paths from the Cordova CLI tool ' +
-  'released with Cordova 2.4.0. It makes some assumptions about paths. ' +
-  'You might want to look at the grunt.js file after init to see if the ' +
+  'released with Cordova 3.0.0. It makes some assumptions about paths. ' +
+  'You might want to look at the Gruntfile.js file after init to see if the ' +
   'paths match your particular project.\n\n' +
   'After answering the questions, you should now install project ' +
   'dependencies with _npm install_. After that, you may execute project tasks ' +
@@ -33,13 +33,11 @@ exports.template = function(grunt, init, done) {
       { name: "name", message: "Enter a name for the project" },
       { name: "version", message: "Enter the version number of the project", default: "0.0.1" },
       { name: "author_name", message: "Enter the name of the author" },
-      { name: "min_concat", message: "Will files be concatenated or minified?", default: "y" },
+      { name: "min_concat", message: "Will files be concatenated or minified?", default: "y/N" },
     ], function(err, props) {
       props.dom = true;
-      console.log(props.min_concat);
-      props.min_concat = !/n/i.test(props.min_concat);
+      props.min_concat = !/y\/N/i.test(props.min_concat);
       props.package_json = true;
-      props.test_task = 'jasmine';
       props.file_name = '<%= pkg.name %>';
 
       // Find the first `preferred` item existing in `arr`.
@@ -49,14 +47,13 @@ exports.template = function(grunt, init, done) {
             return preferred[i];
           }
         }
-        return preferred[0];
+        return "";
       }
 
       // Guess at some directories, if they exist.
       var dirs = grunt.file.expand({filter: 'isDirectory'}, '*')
-        .map(function(d) { return d.slice(0, -1); });
-      props.lib_dir = prefer(dirs, ['www/js', 'src']);
-      props.test_dir = prefer(dirs, ['www/spec', 'test', 'tests', 'unit']);
+        .map(function(d) { return d; });
+      props.lib_dir = prefer(dirs, ['src']);
 
       // Maybe this should be extended to support more libraries. Patches welcome!
       props.jquery = grunt.file.expand({filter: 'isFile'}, '**/jquery*.js').length > 0;

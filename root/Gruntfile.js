@@ -2,44 +2,32 @@
 module.exports = function(grunt) {
 
   // Project configuration.
-  grunt.initConfig({{% if (min_concat) { if (package_json) { %}
-    pkg: '<json:package.json>',
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
     meta: {
       banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
         '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
         '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
-    },{% } else { %}
-    meta: {
-      version: '0.1.0',
-      banner: '/*! PROJECT_NAME - v<%= meta.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '* http://PROJECT_WEBSITE/\n' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
-        'YOUR_NAME; Licensed MIT */'
-    },{% } } %}
-    lint: {
-      files: ['grunt.js', '{%= lib_dir %}/**/*.js']
     },{% if (min_concat) { %}
     concat: {
-      dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:{%= lib_dir %}/{%= file_name %}.js>'],
-        dest: 'www/js/{%= file_name %}.js'
-      }
+      dist: {{% if (lib_dir) { %}
+        src: ['<banner:meta.banner>', '{%= lib_dir %}/**/*.js>'],
+        dest: 'www/js/<%= pkg.name %>.js'
+      {% } %}}
     },
-    min: {
-      dist: {
-        src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-        dest: 'www/js/{%= file_name %}.min.js'
-      }
+    uglify: {
+      dist: {{% if (lib_dir) { %}
+        src: [
+          '<%= concat.dist.dest %>'
+        ],
+        dest: 'www/js/<%= pkg.name %>.min.js'
+      {% } %}}
     },{% } %}
     watch: {
-      files: ['<config:lint.files>', 'www/spec/**/*.js'],
-      tasks: 'lint {%= test_task %}'
-    },
-    jasmine: {
-      all: ['www/spec.html']
+      files: ['<config:jshint.files>'],
+      tasks: ['jshint'{%= (min_concat) ? ",'concat', 'min'" : "" %}]
     },
     shell: {
       _options: {
@@ -52,11 +40,12 @@ module.exports = function(grunt) {
       debug_android: {
         command: 'cordova build android && cordova emulate android'
       },
-      debug_blackberry: {
-        command: 'cordova build blackberry && cordova emulate blackberry'
+      debug_blackberry10: {
+        command: 'cordova build blackberry10 && cordova emulate blackberry10'
       }
     },
     jshint: {
+      files: ['Gruntfile.js', '{%= lib_dir || "www/js" %}/**/*.js'],
       options: {
         curly: true,
         eqeqeq: true,
@@ -69,25 +58,32 @@ module.exports = function(grunt) {
         boss: true,
         devel: true,
         eqnull: true{% if (dom) { %},
-        browser: true{% } %}
-      },
-      globals: {{% if (jquery) { %}
-        jQuery: true
-      {% } %}}
-    }{% if (min_concat) { %},
-    uglify: {}{% } %}
+        browser: true{% } %},
+        globals: {
+          cordova: true{% if (jquery) { %},
+          jQuery: true{% } %}
+        }
+      }
+    }
   });
 
-  grunt.loadNpmTasks('grunt-jasmine-task');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  {% if (min_concat) { %}
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  {% } %}
+
+  // Custom tasks
+  grunt.registerTask('min', ['uglify']); // polyfil for uglify
+  grunt.registerTask('debug','Create a debug build', function(platform) {
+    grunt.task.run('jshint'{%= min_concat ? ",'concat','min'" : "" %});
+    grunt.task.run('shell:debug_' + platform);
+  });
 
   // Default task
-  grunt.registerTask('default', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %}');
+  grunt.registerTask('default', ['jshint'{%= min_concat ? ",'concat','min'" : "" %}]);
   
-  // Custom tasks
-  grunt.registerTask('test', '{%= test_task %}');
-  grunt.registerTask('debug:ios', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_ios');
-  grunt.registerTask('debug:android', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_android');
-  grunt.registerTask('debug:blackberry', 'lint {%= test_task %}{%= min_concat ? " concat min" : "" %} shell:debug_blackberry');
 
 };
