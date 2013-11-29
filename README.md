@@ -9,10 +9,6 @@
 - Grunt - [http://gruntjs.com/](http://gruntjs.com/)
 - Grunt-init - [https://github.com/gruntjs/grunt-init](https://github.com/gruntjs/grunt-init) - see: [http://gruntjs.com/project-scaffolding](http://gruntjs.com/project-scaffolding)
 
-## Installation
-
-#### Start out by installing the non-npm dependencies required above:
-
 - Go to [http://nodejs.org/](http://nodejs.org/) and download and install node.js if you haven't already
 
 Then install the global npm dependencies – depending how you installed node.js, you might need to use `sudo` before any of the `-g` – global – npm installs:
@@ -21,7 +17,9 @@ Then install the global npm dependencies – depending how you installed node.js
 - `npm install -g grunt-cli` - this will give us the `grunt` command that will be the backbone of our build set-up
 - `npm install -g grunt-init` - this is the tool for initialising a Grunt.js workflow in your project using templates like this one.
 
-#### Now clone this repo:
+## Installation
+
+#### Start by cloning this repo:
 
 - `git clone https://github.com/devgeeks/grunt-init-cordova.git`
 
