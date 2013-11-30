@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     },{% if (min_concat) { %}
     concat: {
       dist: {{% if (lib_dir) { %}
-        src: ['<banner:meta.banner>', '{%= lib_dir %}/**/*.js>'],
+        src: ['<banner:meta.banner>', '{%= lib_dir %}/*.js', '{%= lib_dir %}/**/*.js'],
         dest: 'www/js/<%= pkg.name %>.js'
       {% } %}}
     },
@@ -26,8 +26,10 @@ module.exports = function(grunt) {
       {% } %}}
     },{% } %}
     watch: {
-      files: ['<config:jshint.files>'],
-      tasks: ['jshint'{%= (min_concat) ? ",'concat', 'min'" : "" %}]
+      files: [
+        '<%= jshint.files %>'
+      ],
+      tasks: ['jshint'{% if (min_concat) { %}, 'concat', 'min'{% } %}]
     },
     shell: {
       _options: {
@@ -45,7 +47,7 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['Gruntfile.js', '{%= lib_dir || "www/js" %}/**/*.js'],
+      files: ['Gruntfile.js', '{%= lib_dir || "www/js" %}/*.js', '{%= lib_dir || "www/js" %}/**/*.js'],
       options: {
         curly: true,
         eqeqeq: true,
