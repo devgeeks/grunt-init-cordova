@@ -7,9 +7,7 @@
 - Node and npm - [http://nodejs.org/](http://nodejs.org/)
 - Cordova CLI - [https://github.com/apache/cordova-cli/](https://github.com/apache/cordova-cli/)
 - Grunt - [http://gruntjs.com/](http://gruntjs.com/)
-- Grunt-init - [https://github.com/gruntjs/grunt-init](https://github.com/gruntjs/grunt-init) - see: [http://gruntjs.com/project-scaffolding](http://gruntjs.com/project-scaffolding)
-
-- Go to [http://nodejs.org/](http://nodejs.org/) and download and install node.js if you haven't already
+- Grunt-init - [https://github.com/gruntjs/grunt-init](https://github.com/gruntjs/grunt-init) – see: [http://gruntjs.com/project-scaffolding](http://gruntjs.com/project-scaffolding)
 
 Then install the global npm dependencies – depending how you installed node.js, you might need to use `sudo` before any of the `-g` – global – npm installs:
 
