@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     },{% if (min_concat) { %}
     concat: {
       dist: {{% if (lib_dir) { %}
-        src: ['<banner:meta.banner>', '{%= lib_dir %}/*.js', '{%= lib_dir %}/**/*.js'],
+        src: ['<banner:meta.banner>', '{%= lib_dir %}/**/*.js'],
         dest: 'www/js/<%= pkg.name %>.js'
       {% } %}}
     },
