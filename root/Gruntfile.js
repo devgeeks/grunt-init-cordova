@@ -6,14 +6,18 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     meta: {
       banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-        ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
+        '<%= grunt.template.today("yyyy-mm-dd") %>' + '\n' +
+        '<%= pkg.homepage ? "* " + pkg.homepage : "" %>' + '\n' +
+        ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;' + '\n' +
+        ' * License: <%= _.pluck(pkg.licenses, "type").join(", ") %> (<%= _.pluck(pkg.licenses, "url").join(", ") %>)' + '\n' +
+        ' */\n\n'
     },{% if (min_concat) { %}
     concat: {
+      options: {
+        banner:  '<%= meta.banner %>' + '// GENERATED FILE - DO NOT EDIT\n'
+      },
       dist: {{% if (lib_dir) { %}
-        src: ['<banner:meta.banner>', '{%= lib_dir %}/**/*.js'],
+        src: ['{%= lib_dir %}/**/*.js'],
         dest: 'www/js/<%= pkg.name %>.js'
       {% } %}}
     },
