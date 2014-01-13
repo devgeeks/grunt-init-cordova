@@ -21,7 +21,7 @@ Then install the global npm dependencies – depending how you installed node.js
 
 - `git clone https://github.com/devgeeks/grunt-init-cordova.git`
 
-Now, if you run `grunt init`, under "currently-available init templates" you should now have an entry called "cordova"
+Now, if you run `grunt-init`, under "currently-available init templates" you should now have an entry called "cordova"
 
 If everything worked and you have the cordova template available, you are ready to use it with the [cordova-cli](https://github.com/apache/cordova-cli/) tool to get your new project up and running.
 
